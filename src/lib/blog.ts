@@ -22,6 +22,7 @@ export interface PostMetadata {
     excerpt: string;
     image?: string;
     slug: string;
+    keywords: string;
 }
 
 export async function getSortedPostData(): Promise<PostMetadata[]> {
