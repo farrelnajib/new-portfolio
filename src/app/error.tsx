@@ -3,11 +3,17 @@
 import { JSX, useEffect } from 'react'
 import Link from 'next/link'
 import { Button } from "@/components/ui/button"
-import { AlertCircle, Ban, Wifi, ServerCrash, MapPinOff } from 'lucide-react'
+import { AlertCircle, Ban, Wifi, ServerCrash } from 'lucide-react'
 
-function getErrorDetails(error: Error): { icon: JSX.Element; message: string } {
+type ErrorType = {
+    networkError?: boolean
+    serverError?: boolean
+    forbidden?: boolean
+  }
+
+function getErrorDetails(error: Error & ErrorType): { icon: JSX.Element; message: string } {
     // Check if it's a network error
-    if ((error as any).networkError || !window.navigator.onLine) {
+    if (error.networkError || !window.navigator.onLine) {
         return {
         icon: <Wifi className="h-12 w-12 text-destructive mx-auto" />,
         message: "Unable to connect to the server. Please check your internet connection."
@@ -15,7 +21,7 @@ function getErrorDetails(error: Error): { icon: JSX.Element; message: string } {
     }
 
     // Check if it's a server error (500)
-    if ((error as any).serverError || error.message.includes('500')) {
+    if (error.serverError || error.message.includes('500')) {
         return {
         icon: <ServerCrash className="h-12 w-12 text-destructive mx-auto" />,
         message: "Server error occurred."
@@ -23,7 +29,7 @@ function getErrorDetails(error: Error): { icon: JSX.Element; message: string } {
     }
 
     // Check if it's a forbidden error (403)
-    if ((error as any).forbidden || error.message.includes('403')) {
+    if (error.forbidden || error.message.includes('403')) {
         return {
         icon: <Ban className="h-12 w-12 text-destructive mx-auto" />,
         message: "You don't have permission to access this resource."
