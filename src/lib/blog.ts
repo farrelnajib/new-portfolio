@@ -3,31 +3,35 @@
 import { existsSync, readdirSync, readFileSync } from "fs";
 import path from "path";
 import matter from "gray-matter";
+import rehypeShiki from '@shikijs/rehype';
+import rehypeStringify from 'rehype-stringify'
+import remarkParse from 'remark-parse'
+import remarkRehype from 'remark-rehype'
+import { unified } from 'unified'
 
 const postsDirectory = path.join(process.cwd(), "src/posts");
 
 export interface PostProps {
-    slug: string;
-    content?: string;
+    content: string;
+    metadata: PostMetadata;
+}
+
+export interface PostMetadata {
     date: string;
     title: string;
     excerpt: string;
     image?: string;
+    slug: string;
 }
 
-export async function getSortedPostData(): Promise<PostProps[]> {
+export async function getSortedPostData(): Promise<PostMetadata[]> {
     const fileNames = readdirSync(postsDirectory);
     const allPostsData = fileNames.map(fileName => {
-        const slug = fileName.replace(/\.md$/, '');
-
         const fullPath = path.join(postsDirectory, fileName);
         const fileContent = readFileSync(fullPath, "utf8");
 
-        const matterResult = matter(fileContent);
-        return {
-            slug,
-            ...(matterResult.data as { date: string, title: string, excerpt: string, image?: string })
-        }
+        const { data } = matter(fileContent);
+        return data as PostMetadata;
     })
 
     return allPostsData.sort((a, b) => {
@@ -57,13 +61,22 @@ export async function getPostData(slug: string): Promise<PostProps> {
     }
 
     const fileContent = readFileSync(fullPath, "utf8");
-    const matterResult = matter(fileContent);
+    const {content, data} = matter(fileContent);
 
-    // const content = await marked.parse(matterResult.content);
+    const file = await unified()
+        .use(remarkParse)
+        .use(remarkRehype)
+        .use(rehypeShiki, {
+            themes: {
+                dark: 'kanagawa-wave',
+                light: 'kanagawa-wave',
+            }
+        })
+        .use(rehypeStringify)
+        .process(content);
 
     return {
-        slug,
-        content: matterResult.content,
-        ...(matterResult.data as {date: string, title: string, excerpt: string, image?: string})
+        content: file.toString(),
+        metadata: data as PostMetadata,
     }
 }

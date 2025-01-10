@@ -2,18 +2,18 @@
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { PostProps } from "@/lib/blog"
+import { PostMetadata } from "@/lib/blog"
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 
 interface BlogsListProps {
-    posts: PostProps[];
+    posts: PostMetadata[];
 }
 
 const POSTS_PER_PAGE = 6;
 export default function BlogsList({posts}: BlogsListProps) {
-    const [ displayedPosts, setDisplayedPosts ] = useState<PostProps[]>(posts.slice(0, POSTS_PER_PAGE));
+    const [ displayedPosts, setDisplayedPosts ] = useState<PostMetadata[]>(posts.slice(0, POSTS_PER_PAGE));
     const [ hasMore, setHasMore ] = useState(posts.length > POSTS_PER_PAGE);
 
     const loadMore = () => {
@@ -46,7 +46,7 @@ export default function BlogsList({posts}: BlogsListProps) {
     )
 }
 
-export function BlogCard({ post }: { post: PostProps }) {
+export function BlogCard({ post }: { post: PostMetadata }) {
     return (
         <Link href={`/posts/${post.slug}`}>
             <Card className="overflow-hidden transition-all hover:bg-muted/50 h-full hover:-translate-y-1 hover:shadow-lg">

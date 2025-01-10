@@ -4,8 +4,6 @@ import { Icon } from "@iconify/react";
 import backIcon from "@iconify/icons-mdi/keyboard-arrow-left"
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import ReactMarkdown from 'react-markdown'
-import remarkGfm from 'remark-gfm'
 import Image from "next/image";
 
 
@@ -37,11 +35,11 @@ export default async function Post({ params }: { params: Params }) {
                         <Icon icon={backIcon} /> Back to list
                     </Link>
                 </Button>
-                    {postData.image && (
+                    {postData.metadata.image && (
                         <div className="relative w-full h-64">
                             <Image
-                                src={postData.image}
-                                alt={postData.title}
+                                src={postData.metadata.image}
+                                alt={postData.metadata.title}
                                 fill
                                 className="object-cover rounded-lg"
                                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -49,10 +47,10 @@ export default async function Post({ params }: { params: Params }) {
                         </div>
                     )}
                 <div className="space-y-2">
-                    <h1 className="text-4xl font-bold">{postData.title}</h1>
+                    <h1 className="text-4xl font-bold">{postData.metadata.title}</h1>
                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                        <time dateTime={postData.date}>
-                            {new Date(postData.date).toLocaleDateString('en-US', {
+                        <time dateTime={postData.metadata.date}>
+                            {new Date(postData.metadata.date).toLocaleDateString('en-US', {
                                 year: 'numeric',
                                 month: 'long',
                                 day: 'numeric'
@@ -63,9 +61,7 @@ export default async function Post({ params }: { params: Params }) {
                 </div>
             </div>
             <div className="prose dark:prose-invert max-w-none">
-                <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                    {postData.content}
-                </ReactMarkdown>
+                <div dangerouslySetInnerHTML={{ __html: postData.content ?? "" }} />
             </div> 
         </article>
     )
