@@ -1,20 +1,22 @@
 import SkillProps from "./types";
 import Link from "next/link";
-import { Card, CardContent } from "@/components/ui/card";
 import { Icon } from "@iconify/react";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 
 export default function Skill({name, url, icon}: SkillProps) {
     return (
-        <Link href={url} target="_blank" className="transition duration-150 hover:drop-shadow-lg">
-            <Card className="overflow-hidden border-primary/20 grayscale hover:filter-none">
-                <CardContent className="flex items-center gap-3 p-4">
-                    <div className="relative">
-                        <Icon className="w-8 h-8" icon={icon} />
-                    </div>
-                    <span className="font-medium text-primary">{name}</span>
-                </CardContent>
-            </Card>
-        </Link>
+        <TooltipProvider delayDuration={100}>
+            <Tooltip>
+                <TooltipTrigger asChild>
+                    <Link href={url} target="_blank">
+                        <Icon icon={icon} className="relative h-12 w-12 grayscale transition-all hover:scale-110 hover:filter-none"/>    
+                    </Link>
+                </TooltipTrigger>
+                <TooltipContent>
+                    <p>{name}</p>
+                </TooltipContent>
+            </Tooltip>
+        </TooltipProvider>
     )
 }

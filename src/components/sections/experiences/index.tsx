@@ -3,7 +3,7 @@ import ExperienceProps from "./types";
 
 export default function Experience({title, company, contributions, techStacks, period}: ExperienceProps) {
     return (
-        <div className="relative pl-6">
+        <div>
             <div className="absolute left-0 top-0 h-full w-px bg-primary/20">
                 <div className="absolute left-0 top-6 h-3 w-3 -translate-x-1/2 rounded-full bg-primary" />
             </div>

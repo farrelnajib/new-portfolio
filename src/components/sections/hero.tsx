@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
 import downloadIcon from "@iconify/icons-lucide/download";
-import { ThemeSwitcher } from "../theme-switcher";
+// import { ThemeSwitcher } from "../theme-switcher";
 
 
 export default function Hero() {
@@ -15,14 +15,14 @@ export default function Hero() {
                     I&apos;m Farrel Najib Anshary
                 </h1>
                 <p className="text-2xl text-muted-foreground">a Software Engineer</p>
-                <Button asChild>
+                <Button asChild className="transition-all hover:shadow-lg hover:-translate-y-1">
                     <Link href="/CV_Farrel-Najib-Anshary.pdf">
                         <Icon icon={downloadIcon} className="w-4 h-4" />
                         Download Resume
                     </Link>
                 </Button>
             </div>
-            <ThemeSwitcher />
+            {/* <ThemeSwitcher /> */}
         </section>
     )
 }

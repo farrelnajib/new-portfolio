@@ -55,8 +55,33 @@ export default {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
-  		}
+  		},
+		typography: (theme) => ({
+			DEFAULT: {
+				css: {
+					code: {
+						backgroundColor: theme('colors.muted.DEFAULT'),
+						borderRadius: theme('borderRadius.sm'),
+						paddingTop: theme('spacing[0.5]'),
+						paddingBottom: theme('spacing[0.5]'),
+						paddingLeft: theme('spacing[1]'),
+						paddingRight: theme('spacing[1]'),
+						fontFamily: theme('fontFamily.mono'),
+						fontSize: '0.875em',
+					},
+					'code::before': {
+						content: '""',
+					},
+					'code::after': {
+						content: '""',
+					},
+				}
+			}
+		})
   	}
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+	require("tailwindcss-animate"),
+	require('@tailwindcss/typography'),
+  ],
 } satisfies Config;

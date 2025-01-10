@@ -6,19 +6,40 @@ import experiences from "@/data/experiences";
 import achievements from "@/data/achievements";
 import skills from "@/data/skills";
 import Skill from "@/components/sections/skills";
+import { getSortedPostData } from "@/lib/blog";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { BlogCard } from "./posts/blogs";
 
 
-export default function Home() {
+export default async function Home() {
+    const posts = await (await getSortedPostData()).slice(0, 3);
+
     return (
-        <div className="space-y-12">
+        <div className="container mx-auto px-4 py-8 space-y-12">
             <Hero />
-            <About />
+            <section className="space-y-8">
+                <About />
+                <section className="space-y-4">
+                    <h3 className="text-xl font-semibold text-primary">Skills</h3>
+                    <div className="flex flex-wrap gap-6">
+                        {skills.map((skill, index) => (
+                            <Skill 
+                                key={index} 
+                                name={skill.name} 
+                                icon={skill.icon} 
+                                url={skill.url}
+                            />
+                        ))}
+                    </div>
+                </section>
+            </section>
             
             <section className="space-y-4">
                 <h2 className="text-2xl font-bold text-primary">Working Experiences 👨‍💻</h2> 
                 <div className="relative space-y-0">
                     {experiences.map((exp, index) => (
-                        <div key={index}>
+                        <div key={index} className="relative pl-6">
                             <Experience 
                                 title={exp.title}
                                 company={exp.company}
@@ -49,17 +70,24 @@ export default function Home() {
             </section>
             
             <section className="space-y-4">
-                <h2 className="text-2xl font-bold text-primary">Skills</h2>
-                <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-                    {skills.map((skill, index) => (
-                        <Skill 
-                            key={index} 
-                            name={skill.name} 
-                            icon={skill.icon} 
-                            url={skill.url}
-                        />
-                    ))}
+                <div className="flex items-center justify-between">
+                    <h2 className="text-2xl font-bold text-primary">Latest Posts</h2>
+                    <Button variant="outline" asChild>
+                        <Link href="/posts">View All Posts</Link>
+                    </Button>
                 </div>
+                {posts.length > 0 ? (
+                    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 auto-rows-fr">
+                        {posts.map((post, index) => (
+                            <BlogCard
+                                key={index}
+                                post={post}
+                            />
+                        ))}
+                    </div>
+                ) : (
+                    <p className="text-muted-foreground">No blog posts at this moment.</p>
+                )}
             </section>
         </div>
     );
