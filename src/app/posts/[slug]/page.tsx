@@ -6,13 +6,33 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 
+type Params = Promise<{slug: string}>;
+
+export async function generateMetadata({ params }: { params: Params }) {
+    const param = await params;
+
+    let postData: PostProps;
+    try {
+        postData = await getPostData(param.slug);
+    } catch (error) {
+        if (error == "Error: Not Found") {
+            notFound();
+        };
+        throw new Error("500 - Internal Server Error");
+    }
+
+    return {
+        title: postData.metadata.title,
+        description: postData.metadata.excerpt,
+        keywords: postData.metadata.keywords,
+    }
+}
 
 export async function generateStaticParams() {
     const paths = await getAllPostSlugs()
     return paths;
 }
 
-type Params = Promise<{slug: string}>;
 
 export default async function Post({ params }: { params: Params }) {
     const param = await params;
@@ -61,7 +81,7 @@ export default async function Post({ params }: { params: Params }) {
                 </div>
             </div>
             <div className="prose dark:prose-invert max-w-none">
-                <div dangerouslySetInnerHTML={{ __html: postData.content ?? "" }} />
+                <div dangerouslySetInnerHTML={{ __html: postData.content }} />
             </div> 
         </article>
     )
