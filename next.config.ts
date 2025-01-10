@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'raw.githubusercontent.com',
         port: '',
-        pathname: '/farrelnajib/new-portfolio/refs/heads/main/public/asset/images/**',
+        pathname: '/farrelnajib/new-portfolio/refs/heads/main/storage/assets/images/**',
         search: '',
       },
     ],
