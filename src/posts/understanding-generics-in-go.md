@@ -1,7 +1,7 @@
 ---
 title: 'Understanding Generics in Go'
 slug: 'understanding-generics-in-go'
-date: '2025-01-10'
+date: '2025-01-08'
 excerpt: 'Generics in Go (introduced in version 1.18) allow us to write more reusable and type-safe code by abstracting over types.'
 image: 'https://raw.githubusercontent.com/farrelnajib/new-portfolio/refs/heads/main/storage/assets/images/go-banner.jpg'
 keywords: 'go,generic,backend,golang,data,structure'

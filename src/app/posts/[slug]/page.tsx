@@ -56,7 +56,7 @@ export default async function Post({ params }: { params: Params }) {
                     </Link>
                 </Button>
                     {postData.metadata.image && (
-                        <div className="relative w-full h-64">
+                        <div className="relative w-full h-72">
                             <Image
                                 src={postData.metadata.image}
                                 alt={postData.metadata.title}
