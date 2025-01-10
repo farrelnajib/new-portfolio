@@ -48,6 +48,7 @@ jobs:
         username: ${{ secrets.SSH_USERNAME }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
+          echo '${{ secrets.GHCR_TOKEN }}' | docker login ghcr.io -u farrelnajib --password-stdin
           docker stop new-portfolio || true
           docker rm new-portfolio || true
           docker rmi ghcr.io/farrelnajib/new-portfolio:${{ env.tag }} || true
