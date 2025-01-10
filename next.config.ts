@@ -2,7 +2,18 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
-  output: "standalone"
+  output: "standalone",
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'raw.githubusercontent.com',
+        port: '',
+        pathname: '/farrelnajib/new-portfolio/refs/heads/main/public/asset/images/**',
+        search: '',
+      },
+    ],
+  },
 };
 
 export default nextConfig;
