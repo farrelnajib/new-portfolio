@@ -55,6 +55,18 @@ export async function getAllPostSlugs() {
     })
 }
 
+export async function getPostMetadata(slug: string): Promise<PostMetadata> {
+    const fullPath = path.join(postsDirectory, `${slug}.md`);
+    if (!existsSync(fullPath)) {
+        throw new Error("Not Found");
+    }
+
+    const fileContent = readFileSync(fullPath, "utf8");
+    const {data} = matter(fileContent);
+
+    return data as PostMetadata
+}
+
 export async function getPostData(slug: string): Promise<PostProps> {
     const fullPath = path.join(postsDirectory, `${slug}.md`);
     if (!existsSync(fullPath)) {

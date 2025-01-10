@@ -120,7 +120,7 @@ func Sum[T Adder](a, b T) int {
 }
 ```
 
-Go also provides several built-in constraints, such as `comparable` (for types that support `==` and `!=)` and `any`.
+Go also provides several built-in constraints, such as `comparable` (for types that support `==` and `!=`) and `any`.
 
 
 ## When to Use Generics

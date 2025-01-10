@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { getAllPostSlugs, getPostData, PostProps } from "@/lib/blog";
+import { getAllPostSlugs, getPostData, getPostMetadata, PostMetadata, PostProps } from "@/lib/blog";
 import { Icon } from "@iconify/react";
 import backIcon from "@iconify/icons-mdi/keyboard-arrow-left"
 import Link from "next/link";
@@ -11,9 +11,9 @@ type Params = Promise<{slug: string}>;
 export async function generateMetadata({ params }: { params: Params }) {
     const param = await params;
 
-    let postData: PostProps;
+    let postMetadata: PostMetadata;
     try {
-        postData = await getPostData(param.slug);
+        postMetadata = await getPostMetadata(param.slug);
     } catch (error) {
         if (error == "Error: Not Found") {
             notFound();
@@ -22,9 +22,9 @@ export async function generateMetadata({ params }: { params: Params }) {
     }
 
     return {
-        title: postData.metadata.title,
-        description: postData.metadata.excerpt,
-        keywords: postData.metadata.keywords,
+        title: postMetadata.title,
+        description: postMetadata.excerpt,
+        keywords: postMetadata.keywords,
     }
 }
 
