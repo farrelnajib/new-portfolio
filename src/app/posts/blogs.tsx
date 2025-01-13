@@ -57,6 +57,7 @@ export function BlogCard({ post }: { post: PostMetadata }) {
                             alt={post.title}
                             fill
                             className="object-cover"
+                            loading="lazy"
                         />
                     </div>
                 ) : (
