@@ -25,6 +25,10 @@ export const metadata: Metadata = {
         alt: "Farrel Najib Anshary - Software Engineer"
       }
     ]
+  },
+  icons:{
+    icon: "/favicon.ico",
+    apple: "/apple-touch-icon.png",
   }
 };
 
