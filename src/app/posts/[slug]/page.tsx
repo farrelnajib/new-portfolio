@@ -50,7 +50,7 @@ export default async function Post({ params }: { params: Params }) {
     return (
         <article className="container mx-auto px-4 py-8 max-w-2xl space-y-8">
             <div className="space-y-6">
-                <Button variant="ghost" asChild className="-ml-4">
+                <Button variant="ghost" asChild>
                     <Link href="/posts" className="flex items-center gap-2">
                         <Icon icon={backIcon} /> Back to list
                     </Link>

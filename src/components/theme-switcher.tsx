@@ -26,7 +26,7 @@ export function ThemeSwitcher() {
         <TooltipProvider>
             <Tooltip>
                 <TooltipTrigger asChild>
-                    <Button variant="default" size="icon" className="transition-all hover:shadow-lg hover:-translate-y-1" onClick={handleTheme}>
+                    <Button variant="ghost" size="icon" onClick={handleTheme}>
                         <Icon icon={theme == "light" ? darkIcon : lightIcon} className="text-4xl" />
                         <span className="sr-only">Dark Mode Toggle</span>
                     </Button>

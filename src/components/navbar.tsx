@@ -8,7 +8,7 @@ export default function NavBar() {
                 <Link href="/" className="font-semibold text-primary">
                     Farrel Najib Anshary
                 </Link>
-                <nav className="flex items-center gap-6">
+                <nav className="flex items-center gap-4">
                     <Link href="/posts" className="text-sm hover:text-primary">Posts</Link>
                     <ThemeSwitcher />
                 </nav>

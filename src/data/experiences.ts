@@ -16,7 +16,7 @@ const experiences: ExperienceProps[] = [
         techStacks: ["Go", "TypeScript", "gRPC", "Google Cloud", "GraphQL", "PostgreSQL"]
     },
     {
-        title: "Junior Developer (Apple Platform)",
+        title: "Junior Developer (Apple  Platform)",
         company: "Apple Developer Academy @ BINUS",
         period: "Feb 2021 – Dec 2021",
         contributions: "Finished 5 projects ranging from iOS app, macOS app, iPad app, to watchOS app.",
