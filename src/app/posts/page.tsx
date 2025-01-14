@@ -1,7 +1,17 @@
-"use server";
 
+
+import { Metadata } from "next";
 import { getSortedPostData } from "@/lib/blog";
 import BlogsList from "./blogs";
+
+export const metadata: Metadata = {
+    title: "Farrel Najib Anshary | Posts",
+    description: "Thoughts, tutorials, and insight about software development by Farrel Najib Anshary.",
+    openGraph: {
+        title: "Farrel Najib Anshary | Posts",
+        description: "Thoughts, tutorials, and insight about software development by Farrel Najib Anshary."
+    }
+}
 
 const BlogPage = async () => {
 

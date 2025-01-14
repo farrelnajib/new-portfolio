@@ -13,7 +13,19 @@ export const metadata: Metadata = {
   title: "Farrel Najib Anshary - Software Engineer",
   description: "4+ years of experience as a Software Engineer, highly skilled in Golang and TypeScript. Gained my Bachelor of Comp. Science degree from Bina Nusantara University, and currently honing my skills at GovTech Procurement Indonesia.",
   keywords: ["fullstack", "software", "engineer", "go", "golang", "typescript", "laravel", "portfolio"],
-  robots: "index, follow"
+  robots: "index, follow",
+  authors: [{name: "Farrel Najib Anshary"}],
+  openGraph: {
+    title: "Farrel Najib Anshary - Software Engineer",
+    description: "4+ years of experience as a Software Engineer, highly skilled in Golang and TypeScript. Gained my Bachelor of Comp. Science degree from Bina Nusantara University, and currently honing my skills at GovTech Procurement Indonesia.",
+    url: "https://farrelanshary.com",
+    images: [
+      {
+        url: "/img/profile.jpg",
+        alt: "Farrel Najib Anshary - Software Engineer"
+      }
+    ]
+  }
 };
 
 export default function RootLayout({
