@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     url: "https://farrelanshary.com",
     images: [
       {
-        url: "/img/profile.jpg",
+        url: "https://farrelanshary.com/img/profile.jpg",
         alt: "Farrel Najib Anshary - Software Engineer"
       }
     ]
