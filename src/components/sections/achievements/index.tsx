@@ -9,7 +9,7 @@ export default function Achievement({title, date, description, icon, url}: Achie
         day: "numeric"
     }).format(date)
     let content = (
-        <Card className="group border-primary/20 bg-card h-full transition-all hover:-translate-y-1 hover:filter-none hover:shadow-lg hover:bg-muted/50">
+        <Card className="group bg-card h-full transition-all hover:-translate-y-1 hover:filter-none hover:shadow-lg hover:bg-muted/50">
             <CardContent className="flex items-start gap-4 p-6">
                 <div className="text-3xl filter grayscale group-hover:filter-none transition">{icon}</div>
                 <div>

@@ -9,7 +9,7 @@ import Skill from "@/components/sections/skills";
 import { getSortedPostData } from "@/lib/blog";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { BlogCard } from "./posts/blogs";
+import BlogCard from "@/components/blog-card";
 
 
 export default async function Home() {

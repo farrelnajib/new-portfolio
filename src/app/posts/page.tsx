@@ -6,10 +6,10 @@ import BlogsList from "./blogs";
 
 export const metadata: Metadata = {
     title: "Farrel Najib Anshary | Posts",
-    description: "Thoughts, tutorials, and insight about software development by Farrel Najib Anshary.",
+    description: "Thoughts, tutorials, and insights about software development by Farrel Najib Anshary.",
     openGraph: {
         title: "Farrel Najib Anshary | Posts",
-        description: "Thoughts, tutorials, and insight about software development by Farrel Najib Anshary."
+        description: "Thoughts, tutorials, and insights about software development by Farrel Najib Anshary."
     }
 }
 
@@ -20,9 +20,9 @@ const BlogPage = async () => {
     return (
         <div className="container mx-auto px-4 py-8 space-y-8">
             <div className="space-y-2">
-                <h1 className="text-3xl font-bold">Blog Posts</h1>
+                <h1 className="text-3xl font-bold">Posts</h1>
                 <p className="text-muted-foreground">
-                    Thoughts, tutorials, and insight about software development.
+                    Thoughts, tutorials, and insights about software development.
                 </p>
             </div>
             <BlogsList posts={allPosts} />

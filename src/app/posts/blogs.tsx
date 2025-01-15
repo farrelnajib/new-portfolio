@@ -1,7 +1,6 @@
 "use client"
 
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { PostMetadata } from "@/lib/blog"
 import Image from "next/image";
 import Link from "next/link";
@@ -24,14 +23,14 @@ export default function BlogsList({posts}: BlogsListProps) {
     };
 
     if (displayedPosts.length == 0) {
-        return (<p className="text-muted-foreground">No blog posts at this moment.</p>);
+        return (<p className="text-muted-foreground">No posts at this moment.</p>);
     }
 
     return (
         <>
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 auto-rows-fr">
+            <div className="grid gap-8">
                 {displayedPosts.map((post, index) => (
-                    <BlogCard
+                    <BlogListItem
                         key={index}
                         post={post}
                     />
@@ -46,12 +45,12 @@ export default function BlogsList({posts}: BlogsListProps) {
     )
 }
 
-export function BlogCard({ post }: { post: PostMetadata }) {
+function BlogListItem({ post }: { post: PostMetadata }) {
     return (
         <Link href={`/posts/${post.slug}`}>
-            <Card className="overflow-hidden transition-all hover:bg-muted/50 h-full hover:-translate-y-1 hover:shadow-lg">
+            <div className="flex gap-4 group">
                 {post.image ? (
-                    <div className="relative w-full h-48">
+                    <div className="relative shrink-0 w-36 h-36 rounded-lg overflow-hidden">
                         <Image
                             src={post.image}
                             alt={post.title}
@@ -61,29 +60,27 @@ export function BlogCard({ post }: { post: PostMetadata }) {
                         />
                     </div>
                 ) : (
-                    <div className="relative h-48 bg-muted flex items-center justify-center">
+                    <div className="relative shrink-0 w-36 h-36 rounded-lg bg-muted flex items-center justify-center">
                         <span className="text-4xl text-muted-foreground">📷</span>
                     </div>
                 )}
-                <CardContent className="p-6">
-                    <article className="space-y-3">
-                        <div className="space-y-2">
-                            <h2 className="text-xl font-semibold">{post.title}</h2>
-                            <time
-                                dateTime={post.date}
-                                className="text-sm text-muted-foreground"
-                            >
-                                {new Date(post.date).toLocaleDateString('en-US', {
-                                    year: 'numeric',
-                                    month: 'long',
-                                    day: 'numeric'
-                                })}
-                            </time>
-                        </div>
-                        <p className="text-muted-foreground line-clamp-2">{post.excerpt}</p>
-                    </article>
-                </CardContent>
-            </Card>
+                <article className="space-y-3">
+                    <div className="space-y-2">
+                        <h2 className="text-xl font-semibold group-hover:underline">{post.title}</h2>
+                        <time
+                            dateTime={post.date}
+                            className="text-sm text-muted-foreground"
+                        >
+                            {new Date(post.date).toLocaleDateString('en-US', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric'
+                            })}
+                        </time>
+                    </div>
+                    <p className="text-muted-foreground line-clamp-2">{post.excerpt}</p>
+                </article>
+            </div>
         </Link>
     )
 }

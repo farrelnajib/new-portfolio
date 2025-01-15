@@ -4,10 +4,10 @@ import ExperienceProps from "./types";
 export default function Experience({title, company, contributions, techStacks, period}: ExperienceProps) {
     return (
         <div>
-            <div className="absolute left-0 top-0 h-full w-px bg-primary/20">
+            <div className="absolute left-0 top-0 h-full w-px bg-border">
                 <div className="absolute left-0 top-6 h-3 w-3 -translate-x-1/2 rounded-full bg-primary" />
             </div>
-            <Card className="border-primary/20">
+            <Card>
                 <CardContent className="p-6">
                     <div className="flex flex-row justify-between">
                         <h3 className="font-semibold text-primary">{title}</h3>
