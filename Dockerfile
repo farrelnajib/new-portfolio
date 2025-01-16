@@ -12,6 +12,8 @@ FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+ARG GTM_ID
+ENV GTM_ID=GTM-${GTM_ID}
 RUN npm run build
 
 FROM base AS runner

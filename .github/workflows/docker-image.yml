@@ -36,6 +36,8 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         context: .
+        build-args:
+          - GTM_ID=${{ secrets.GTM_ID }}
         push: true
         tags: |
           ghcr.io/farrelnajib/new-portfolio:${{ env.tag }}

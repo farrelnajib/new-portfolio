@@ -1,11 +1,14 @@
+"use client"
+
 import { Card, CardContent } from "@/components/ui/card";
 import { PostMetadata } from "@/lib/blog"
 import Image from "next/image";
 import Link from "next/link";
+import {sendGTMEvent} from "@next/third-parties/google";
 
 export default function BlogCard({ post }: { post: PostMetadata }) {
     return (
-        <Link href={`/posts/${post.slug}`}>
+        <Link href={`/posts/${post.slug}`} onClick={() => sendGTMEvent({ event: "postOpened", value: post.title })}>
             <Card className="overflow-hidden transition-all hover:bg-muted/50 h-full hover:-translate-y-1 hover:shadow-lg">
                 {post.image ? (
                     <div className="relative w-full h-48">

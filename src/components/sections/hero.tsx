@@ -1,9 +1,10 @@
+"use client"
+
 import { Button } from "@/components/ui/button";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
 import downloadIcon from "@iconify/icons-lucide/download";
-// import { ThemeSwitcher } from "../theme-switcher";
-
+import {sendGTMEvent} from "@next/third-parties/google";
 
 export default function Hero() {
     return (
@@ -16,7 +17,10 @@ export default function Hero() {
                 </h1>
                 <p className="text-2xl text-muted-foreground">a Software Engineer</p>
                 <Button asChild className="transition-all hover:shadow-lg hover:-translate-y-1">
-                    <Link href="https://raw.githubusercontent.com/farrelnajib/new-portfolio/refs/heads/main/storage/assets/documents/CV_Farrel-Najib-Anshary.pdf">
+                    <Link
+                        href="https://raw.githubusercontent.com/farrelnajib/new-portfolio/refs/heads/main/storage/assets/documents/CV_Farrel-Najib-Anshary.pdf"
+                        onClick={() => sendGTMEvent({ event: "cvDownloaded" })}
+                    >
                         <Icon icon={downloadIcon} className="w-4 h-4" />
                         Download Resume
                     </Link>
