@@ -5,7 +5,7 @@ import { PostMetadata } from "@/lib/blog"
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import {sendGTMEvent} from "@next/third-parties/google";
+import {sendGAEvent, sendGTMEvent} from "@next/third-parties/google";
 
 interface BlogsListProps {
     posts: PostMetadata[];
@@ -47,8 +47,12 @@ export default function BlogsList({posts}: BlogsListProps) {
 }
 
 function BlogListItem({ post }: { post: PostMetadata }) {
+    const sendAnalytics = () => {
+        sendGTMEvent({ event: "postOpened", value: post.title });
+        sendGAEvent("event", "postOpened", { value: post.title });
+    }
     return (
-        <Link href={`/posts/${post.slug}`} onClick={() => sendGTMEvent({ event: "postOpened", value: post.title })}>
+        <Link href={`/posts/${post.slug}`} onClick={() => sendAnalytics()}>
             <div className="flex gap-4 group">
                 {post.image ? (
                     <div className="relative shrink-0 w-36 h-36 rounded-lg overflow-hidden">

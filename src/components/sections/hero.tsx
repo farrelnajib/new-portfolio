@@ -4,9 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Icon } from "@iconify/react";
 import Link from "next/link";
 import downloadIcon from "@iconify/icons-lucide/download";
-import {sendGTMEvent} from "@next/third-parties/google";
+import {sendGAEvent, sendGTMEvent} from "@next/third-parties/google";
 
 export default function Hero() {
+    const sendCVDownloadedEvent = () => {
+        sendGTMEvent({ event: "cvDownloaded" });
+        sendGAEvent("event", "cvDownloaded");
+    }
     return (
         <section className="flex flex-row justify-between gap-8 py-12">
             <div className="space-y-4">
@@ -19,7 +23,7 @@ export default function Hero() {
                 <Button asChild className="transition-all hover:shadow-lg hover:-translate-y-1">
                     <Link
                         href="https://raw.githubusercontent.com/farrelnajib/new-portfolio/refs/heads/main/storage/assets/documents/CV_Farrel-Najib-Anshary.pdf"
-                        onClick={() => sendGTMEvent({ event: "cvDownloaded" })}
+                        onClick={() => sendCVDownloadedEvent()}
                     >
                         <Icon icon={downloadIcon} className="w-4 h-4" />
                         Download Resume

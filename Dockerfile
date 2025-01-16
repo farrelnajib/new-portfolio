@@ -12,8 +12,12 @@ FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+
 ARG GTM_ID
 ENV GTM_ID=${GTM_ID}
+ARG GA_ID
+ENV GA_ID=${GA_ID}
+
 RUN npm run build
 
 FROM base AS runner

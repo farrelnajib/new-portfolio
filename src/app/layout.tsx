@@ -5,7 +5,7 @@ import ThemeProvider from "@/components/theme-provider";
 import Footer from "@/components/footer";
 import NavBar from "@/components/navbar";
 import React from "react";
-import {GoogleTagManager} from "@next/third-parties/google";
+import {GoogleAnalytics, GoogleTagManager} from "@next/third-parties/google";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -39,10 +39,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const gtmId = process.env.GTM_ID;
+  const gaId = process.env.GA_ID;
 
   return (
     <html lang="en" suppressHydrationWarning className="h-full">
       { gtmId && <GoogleTagManager gtmId={gtmId} /> }
+      { gaId && <GoogleAnalytics gaId={gaId} /> }
       <body
         className={`${inter.className} antialiased flex flex-col h-full`}
       >
