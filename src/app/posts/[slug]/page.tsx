@@ -30,12 +30,6 @@ export async function generateMetadata({ params }: { params: Params }) {
     }
 }
 
-export async function generateStaticParams() {
-    const paths = await getAllPostSlugs()
-    return paths;
-}
-
-
 export default async function Post({ params }: { params: Params }) {
     const param = await params;
 
