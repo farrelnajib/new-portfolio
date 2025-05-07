@@ -6,6 +6,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 
+export const runtime = 'edge';
+
 type Params = Promise<{slug: string}>;
 
 export async function generateMetadata({ params }: { params: Params }) {
