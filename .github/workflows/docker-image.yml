@@ -1,9 +1,5 @@
 name: Build and Deploy Docker to Server
 
-permissions:
-  id-token: write # This is required for the tailscale action to request a JWT from GitHub
-  contents: read
-
 on:
   push:
     branches:
@@ -76,7 +72,7 @@ jobs:
         uses: tailscale/github-action@v4
         with:
           oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
-          audience: ${{ secrets.TS_AUDIENCE }}
+          oauth-secret: ${{ secrets.TS_OAUTH_CLIENT_SECRET }}
           tags: tag:ci
           ping: ${{ secrets.SSH_HOST }}
 
