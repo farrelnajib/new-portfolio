@@ -19,6 +19,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    outputs:
+      image_tag: ${{ env.tag }}
 
     steps:
       # Step 1: Checkout the repository
@@ -87,8 +89,8 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             echo '${{ secrets.GHCR_TOKEN }}' | docker login ghcr.io -u farrelnajib --password-stdin
+            docker pull ghcr.io/farrelnajib/new-portfolio:${{ needs.build-images.outputs.image_tag }}
             docker stop new-portfolio || true
             docker rm new-portfolio || true
-            docker rmi ghcr.io/farrelnajib/new-portfolio:${{ env.tag }} || true
-            docker pull ghcr.io/farrelnajib/new-portfolio:${{ env.tag }}
-            docker run -d --name new-portfolio -p 3000:3000 ghcr.io/farrelnajib/new-portfolio:${{ env.tag }}
+            docker run -d --name new-portfolio -p 3000:3000 ghcr.io/farrelnajib/new-portfolio:${{ needs.build-images.outputs.image_tag }}
+            docker image prune -f
