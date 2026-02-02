@@ -1,13 +1,22 @@
 name: Build and Deploy Docker to Server
 
+permissions:
+  id-token: write # This is required for the tailscale action to request a JWT from GitHub
+
 on:
   push:
     branches:
       - main
   workflow_dispatch:
+    inputs:
+      deploy:
+        description: "Deploy to server?"
+        required: true
+        default: false
+        type: boolean
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -44,7 +53,27 @@ jobs:
           tags: |
             ghcr.io/farrelnajib/new-portfolio:${{ env.tag }}
 
-      # Step 6: Deploy to server via SSH
+      # Step 6: Add tag to build summary
+      - name: Add tag to build summary
+        run: |
+          echo "## Build Information" >> $GITHUB_STEP_SUMMARY
+          echo "* **Image Tag**: \`${{ env.tag }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "* **Image URL**: [ghcr.io/farrelnajib/new-portfolio:${{ env.tag }}](https://ghcr.io/farrelnajib/new-portfolio:${{ env.tag }})" >> $GITHUB_STEP_SUMMARY
+
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'push' || github.event.inputs.deploy == 'true' }}
+    steps:
+      # Step 1: Connect to tailscale
+      - name: Tailscale
+        uses: tailscale/github-action@v4
+        with:
+          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          audience: ${{ secrets.TS_AUDIENCE }}
+          tags: tag:ci
+          ping: ${{ secrets.SSH_HOST }}
+
+      # Step 2: Deploy to server via SSH
       - name: Deploy to server via SSH
         uses: appleboy/ssh-action@v0.1.5
         with:
