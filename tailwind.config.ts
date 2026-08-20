@@ -1,8 +1,7 @@
 import type { Config } from "tailwindcss";
-import type { PluginUtils } from "tailwindcss/types/config";
 
 export default {
-    darkMode: ["class"],
+    darkMode: "class",
     content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -57,7 +56,7 @@ export default {
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
   		},
-		typography: ({theme}: PluginUtils) => ({
+		typography: ({theme}: any) => ({
 			DEFAULT: {
 				css: {
 					code: {
